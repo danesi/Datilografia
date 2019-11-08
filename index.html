@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-    Teste teste teste teste
-    <form action="#">
-        <input name="texto" placeholder="Digite o texto">
+
+<p class="principal">TEste teste teste teste</p>
+    <form action="#" class="form">
+        <input name="texto" placeholder="Digite o texto" class="texto">
         <input type="submit" value="verificar">
     </form>
 </body>
 </html>
 <script>
-
+    $('.form').submit(function () {
+        var principal = $('.principal').text().split("");
+        var texto = $('.texto').val().split("");
+        var cont = 0;
+        for(i = 0; i < principal.length; i++){
+            if(principal[i] === texto[i]){
+                cont++;
+            }
+        }
+        console.log(cont);
+        return false;
+    });
 </script>
