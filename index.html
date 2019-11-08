@@ -53,7 +53,7 @@
                         <p class="principal"></p><br><br>
                         <form action="#" class="form">
                             <div class="input-field col s12">
-                                <input name="texto" id="texto" type="text" class="texto" autocomplete="off">
+                                <input name="texto" id="texto" type="text" class="texto" disabled autocomplete="off">
                                 <label for="texto">Digite o texto</label>
                             </div>
                             <div class="row center">
@@ -99,6 +99,7 @@
 
     $('.comeca').click(function () {
         isStarted = true;
+        $(".texto").removeAttr("disabled");
         startCountdown();
     });
 
@@ -111,7 +112,8 @@
                 cont++;
             }
         }
-        console.log(cont);
+        console.log('Quantidade: ' + principal.length)
+        console.log('Acertos: ' + cont);
         return false;
     });
 
