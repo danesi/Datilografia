@@ -39,7 +39,9 @@
                 <div class="left-align col s1">
                     <i class="large material-icons large">access_alarms</i>
                 </div>
-                <div class="cronometro col offset-s2"></div>
+                <div class="cronometro col offset-s2">00:01:40</div>
+                <br>
+                <button class="btn col offset-s2 comeca">Começar</button>
             </div>
         </div>
         <div class="row">
@@ -56,6 +58,7 @@
                             </div>
                             <div class="row center">
                                 <input type="submit" class="btn" value="verificar">
+                                <a href="index.html" class="btn"><i class="large material-icons">refresh</i></a>
                             </div>
                         </form>
                     </div>
@@ -76,7 +79,7 @@
 </body>
 </html>
 <script>
-
+    var isStarted = false;
     var tsorte = ["O Rio Grande do Norte é isso: sal, sol, nordeste. Barreira do Inferno, viagens espaciais, industrialização. Algodão do Seridó, salinas de Mossoró e miragens. Luta contra a seca, praias de areias coloridas, céu limpo. O último forte do folclore brasileiro, a melhor carne-de-sol do Brasil. O litoral potiguar tem um céu limpo todo o ano, ventos fracos e regulares, chuvas rápidas.",
         "Dizer que o chão (a pista, a escada etc.) está escorregando, pode bem ser o reflexo de uma dose a mais de uísque... Após a ressaca, chega-se logo à conclusão da forma correta:Escorregadio. Ex.: Chove, a pista está escorregadia; a empregada está fazendo limpeza. Cuidado! O piso está escorregadio etc."
         , "A datilografia é hoje encarada como um complemento cultural e técnico, indispensável a qualquer indivíduo, seja estudante, professor, comerciante, médico ou advogado."
@@ -94,6 +97,11 @@
         $('.principal').append(tsorte[sorteado]);
     });
 
+    $('.comeca').click(function () {
+        isStarted = true;
+        startCountdown();
+    });
+
     $('.form').submit(function () {
         var principal = $('.principal').text().split("");
         var texto = $('.texto').val().split("");
@@ -109,24 +117,28 @@
 
     var tempo = new Number();
     tempo = 100;
-    function startCountdown(){
-        if((tempo - 1) >= 0){
-            var min = parseInt(tempo/60);
-            var seg = tempo%60;
 
-            if(min < 10){
-                min = "0"+min;
-                min = min.substr(0, 2);
+    function startCountdown() {
+        if(isStarted) {
+            if ((tempo - 1) >= 0) {
+                var min = parseInt(tempo / 60);
+                var seg = tempo % 60;
+
+                if (min < 10) {
+                    min = "0" + min;
+                    min = min.substr(0, 2);
+                }
+                if (seg <= 9) {
+                    seg = "0" + seg;
+                }
+                horaImprimivel = '00:' + min + ':' + seg;
+                $(".cronometro").html(horaImprimivel);
+                setTimeout('startCountdown()', 1000);
+                tempo--;
             }
-            if(seg <=9){
-                seg = "0"+seg;
-            }
-            horaImprimivel = '00:' + min + ':' + seg;
-            $(".cronometro").html(horaImprimivel);
-            setTimeout('startCountdown()',1000);
-            tempo--;
         }
     }
+
     startCountdown();
 
 </script>
